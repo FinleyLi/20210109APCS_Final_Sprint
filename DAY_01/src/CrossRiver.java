@@ -37,7 +37,44 @@ public class CrossRiver{
 		String str = listThis.get(0);
 		listThis.remove(str);
 		if(this.isSafe(listThis)){
-			System.out.pirnt("farmer_take" + str +  "Cross River")
-		}
-	} 
+            System.out.println("農夫帶著 " + str + " 從此岸到彼岸");
+            System.out.println("此岸" + listThis + "\b" + "彼岸" + listThat);
+            System.out.println();
+            listThat.add(str);
+            thatToThis();
+        }else{
+            listThis.add(str);
+            thisTothat();
+        }
+	}
+	public void thatToThis(){
+        if(listThis.isEmpty()){
+            System.out.println("此岸" + listThis + "\b" + "彼岸" + listThat);
+            return;
+        }
+        if(isSafe(listThat)){
+            System.out.println("農夫從彼岸到此岸");
+            System.out.println("此岸" + listThis + "\b" + "彼岸" + listThat);
+            System.out.println();
+            thisTothat();
+        }else{
+            String str = listThat.get(0);
+            listThat.remove(0);
+            if(isSafe(listThat)){
+                System.out.println("農夫帶著 " + str + " 從彼岸到此岸");
+                System.out.println("此岸" + listThis + "\b" + "彼岸" + listThat);
+                System.out.println();
+                listThis.add(str);
+                thisTothat();
+            }else{
+                listThat.add(str);
+                thatToThis();
+            }
+        }
+    }
+    public static void main(String[] args){
+        System.out.println("脚本之家测试结果：");
+        System.out.println();
+        new CrossRiver().thisTothat();
+    }
 }
